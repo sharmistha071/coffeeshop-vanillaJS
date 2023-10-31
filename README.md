@@ -1,9 +1,9 @@
-This repo is a companion to the [You Don't Need That Library][course] course on Frontend Masters.
+Coffee ordering application using VanillaJS
 
-[![Frontend Masters](images/FrontendMastersLogo.png)][fem]
+User can order Coffee
 
-[Please click here][website] to head to the course website.
+Products menu with details
 
-[fem]: https://www.frontendmasters.com
-[website]: https://firtman.github.io/vanilla/
-[course]: https://frontendmasters.com/courses/vanilla-js-apps/
+Cart to order 
+
+
