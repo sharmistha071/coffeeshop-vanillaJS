@@ -6,9 +6,9 @@ export class MenuPage extends HTMLElement{
         this.root.appendChild(styles)
 
         async function loadCSS(){
-           const rendercss =  await fetch("/components/MenuPage.css")
-           const css = await rendercss.text()
-
+           const request =  await fetch("/components/MenuPage.css")
+           const css = await request.text()
+           styles.textContent = css
         }
         loadCSS()
     }
@@ -18,7 +18,33 @@ export class MenuPage extends HTMLElement{
         const template = document.getElementById('menu-page-template')
         const content = template.content.cloneNode(true)
         this.root.appendChild(content)
+        window.addEventListener("appMenuChanged", ()=>{
+            this.render()
+        })
+    }
 
+    render(){
+        if(_app.store.menu){
+        this.root.querySelector('#menu').innerHTML = ''
+            
+           for(let category of _app.store.menu){
+            console.log(category)
+                const liCategory = document.createElement('li')
+                liCategory.innerHTML= `
+                    <h3>${category.name}</h3>
+                    <ul class='category'></ul>
+                `
+                this.root.querySelector('#menu').appendChild(liCategory)
+
+                category.products.forEach(product =>{
+                    const item = document.createElement("product-item")
+                    item.dataset.product = JSON.stringify(product)
+                    liCategory.querySelector("ul").appendChild(item)
+                })
+           } 
+        }else{
+           this.root.querySelector("menu").innerHTML = "loading....."
+        }
     }
 }
 
